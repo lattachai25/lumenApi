@@ -1,0 +1,35 @@
+composer create-project --prefer-dist laravel/lumen blog
+
+run
+php -S localhost:8000 -t public
+
+composer require flipbox/lumen-generator
+
+-------------------------------------------------------------------------------------------
+add to app->bootstrap
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+
+-------------------------------------------------------------------------------------------
+
+php artisan key:generate
+
+php artisan make:model 
+
+
+php artisan make:model User -mcr
+
+php artisan migrate
+
+
+php artisan make:controller v1/UserController --api
+
+
+
+$router->group(['prefix' => 'api/v1'], function() use ($router){
+	$router->get('/users','UserController@index')
+});
+
+
+$router->group(['prefix' => 'api/v1', 'namespace' => 'v1'], function () use ($router){
+	$router->get('/users','UserController@index');
+});
